@@ -20,7 +20,7 @@ class Game {
    
     startNewGame() {
         this.board = this.initBoard();
-        console.log("New Games started, field was reseted");
+        console.log("New Game started");
     }
 
 //1.3. Метод displayBoard должен выводить текущее состояние игрового поля.
@@ -31,6 +31,11 @@ class Game {
             console.log(row.join(' '));
         }
         console.log('---------------------');
+    }
+
+    play(){
+        this.startNewGame();
+        
     }
 }
 
@@ -54,8 +59,7 @@ class Player {
     getMove() {
        const row = +prompt('Enter coordinates of row: ' );
        const col = +prompt('Enter coordinates of collumn: ');
-       const coordinates = [row, col];
-       return coordinates;
+       return {row, col};
     }
 }
 
@@ -63,7 +67,8 @@ class Player {
 
 
 // Шаг 3: Взаимодействие между объектами Game и Player
-// 3.1. Метод play в классе Game должен содержать основной цикл игры, в котором вызываются методы makeMove и getMove для каждого игрока.
+// 3.1. Метод play в классе Game должен содержать основной цикл игры, в котором 
+//      Bызываются методы makeMove и getMove для каждого игрока.
 // 3.2. После каждого хода вызывай метод displayBoard для отображения текущего состояния игрового поля.
 // 3.3. Проверяй выигрышные комбинации после каждого хода и объявляй победителя или ничью.
 const game = new Game();
