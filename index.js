@@ -5,7 +5,7 @@
 class Game {
     constructor() {
         this.board = this.initBoard()
-        
+        this.winner = null;
     }
     initBoard() {
         const board = [
@@ -32,10 +32,18 @@ class Game {
         }
         console.log('---------------------');
     }
-
+// Шаг 3: Взаимодействие между объектами Game и Player
+// 3.1. Метод play в классе Game должен содержать основной цикл игры, в котором 
+//      Bызываются методы makeMove и getMove для каждого игрока.
+// 3.2. После каждого хода вызывай метод displayBoard для отображения текущего состояния игрового поля.
+// 3.3. Проверяй выигрышные комбинации после каждого хода и объявляй победителя или ничью.
+    
     play(){
         this.startNewGame();
-        
+        while(winner === null) {
+            player1.getMove();
+
+        }
     }
 }
 
@@ -51,8 +59,8 @@ class Player {
 
 // 2.2. Метод makeMove должен принимать координаты (ряд и столбец) от игрока и вносить его знак на игровое поле.
 
-    makeMove(row, col) {
-        game.board[row][col] = this.playerType;
+    makeMove({row, col}) {
+        game.board[row][col] = this.playerType; // insert a player symbol to the game board (X or O)
     }
 // 2.3. Метод getMove должен запрашивать у игрока ввод координат для совершения хода.
 
@@ -66,11 +74,9 @@ class Player {
 
 
 
-// Шаг 3: Взаимодействие между объектами Game и Player
-// 3.1. Метод play в классе Game должен содержать основной цикл игры, в котором 
-//      Bызываются методы makeMove и getMove для каждого игрока.
-// 3.2. После каждого хода вызывай метод displayBoard для отображения текущего состояния игрового поля.
-// 3.3. Проверяй выигрышные комбинации после каждого хода и объявляй победителя или ничью.
+
 const game = new Game();
+const player1 = new Player("X");
+const player2 = new Player("O");
 game.startNewGame();
 game.displayBoard();
