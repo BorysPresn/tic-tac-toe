@@ -42,7 +42,17 @@ class Game {
         this.startNewGame();
         while(winner === null) {
             player1.getMove();
-
+            player1.makeMove();
+            if(this.checkWinner()){
+                console.log('Player X win!!!');
+                break;
+            };
+            player2.getMove();
+            player2.makeMove();
+            if(this.checkWinner()){
+                console.log('Player O win!!!');
+                break;
+            };
         }
     }
 }
