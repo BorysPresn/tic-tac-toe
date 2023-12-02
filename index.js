@@ -29,7 +29,20 @@ class Game {
     displayBoard() {
         console.log("current board state");
         for(let row of this.board){
-            console.log(row.join(' '));
+            let newRow = [];
+            // console.log("-|-|-");
+            row.forEach(elem => {
+                if(elem === null){
+                    newRow.push("_");
+                } else {
+                    newRow.push(elem);
+                }
+                if(row.indexOf(elem) != 2){
+                    newRow.push('|');
+                }
+            })
+            console.log(newRow.join(''));
+            
         }
         console.log('---------------------');
     }
@@ -50,6 +63,9 @@ class Game {
                 return board[i][0];
             }
         }
+        if(board.flat().indexOf(null) == -1){
+            return -1;
+        }
         return null;
     }
 
@@ -59,19 +75,24 @@ class Game {
             let move1 = player1.getMove();
             player1.makeMove(move1);
             this.displayBoard();
-            if(this.checkWinner()){
-                this.winner = player1.playerType;
+            this.winner = this.checkWinner();
+            if(this.winner && this.winner != -1){
+                // this.winner = player1.playerType;
                 console.log(`Player ${this.winner} win!!!`);
                 return;
             };
             let move2 = player2.getMove();
             player2.makeMove(move2);
             this.displayBoard();
-            if(this.checkWinner()){
-                this.winner = player2.playerType;
+            this.winner = this.checkWinner();
+            if(this.winner && this.winner != -1){
+                // this.winner = player2.playerType;
                 console.log(`Player ${this.winner} win!!!`);
                 return;
             };
+            if(this.winner == -1){
+                console.log("Nobody wins...")
+            }
         }
 
     }
@@ -109,4 +130,5 @@ class Player {
 const game = new Game();
 const player1 = new Player("X", game);
 const player2 = new Player("O", game);
+console.groupCollapsed = console.group = console.groupEnd = function () {};
 game.play();
